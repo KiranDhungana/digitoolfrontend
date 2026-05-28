@@ -67,8 +67,8 @@ export default function AdminBrandsPage() {
       const body = {
         ...form,
         sortOrder: Number(form.sortOrder),
-        imageUrl: form.imageUrl || null,
-        mediaId: form.mediaId || null,
+        imageUrl: form.imageUrl || undefined,
+        mediaId: form.mediaId || undefined,
       };
       if (editing) {
         await adminUpdateBrand(editing.id, body);
