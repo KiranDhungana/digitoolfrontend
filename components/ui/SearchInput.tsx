@@ -271,7 +271,7 @@ export function SearchInput({
                       </p>
                     </div>
                     <span className="shrink-0 text-sm font-semibold text-orange-600">
-                      {formatPrice(product.price, product.currency)}
+                      {formatPrice(product.price)}
                     </span>
                   </Link>
                 );

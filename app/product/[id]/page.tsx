@@ -25,6 +25,7 @@ export default async function ProductPage({ params }: PageProps) {
   return (
     <PageShell>
       <PageHeader
+        title={product.name}
         breadcrumbs={[
           { label: "Home", href: ROUTES.home },
           { label: "All gift cards", href: ROUTES.giftCards },

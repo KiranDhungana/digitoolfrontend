@@ -1,6 +1,6 @@
 import DOMPurify from "isomorphic-dompurify";
 
-const SANITIZE_OPTIONS: DOMPurify.Config = {
+const SANITIZE_OPTIONS = {
   ALLOWED_TAGS: [
     "p",
     "br",
