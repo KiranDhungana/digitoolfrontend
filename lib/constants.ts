@@ -21,6 +21,9 @@ export const ROUTES = {
   support: "/support",
   admin: "/admin",
   adminLogin: "/admin/login",
+  blog: "/blog",
+  blogPost: (slug: string) => `/blog/${slug}`,
+  adminBlogs: "/admin/blogs",
 } as const;
 
 export const NAV_LINKS = [
@@ -31,14 +34,14 @@ export const NAV_LINKS = [
 ] as const;
 
 export const HERO_HEADLINE =
-  "Gaming, software & digital products at";
+  "Buy gift cards & digital products in Nepal —";
 
 export const HERO_SUBTITLE =
-  "More than gift cards — shop gaming, software, and digital codes from trusted brands in one place.";
+  "PUBG UC, Roblox, Steam, PlayStation, Xbox, Apple & Microsoft 365. Pay with Fonepay or Khalti — fast delivery after verification.";
 
 export const HERO_FEATURES = [
-  "Gift cards, game credits & app store credit",
-  "Gaming and software — browse by brand or category",
+  "Gaming gift cards & game credits for Nepal",
+  "Software, app store & subscription codes",
   "100% refund guarantee if there is a problem with your order",
 ] as const;
 

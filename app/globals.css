@@ -63,11 +63,7 @@ button:disabled {
 .product-description-editor .ProseMirror p {
   margin: 0;
   padding: 0;
-}
-
-.product-description-editor .ProseMirror p:empty,
-.product-description-editor .ProseMirror p:has(> br:only-child) {
-  display: none;
+  min-height: 1.45em;
 }
 
 .product-description-editor .ProseMirror p + p {
@@ -81,11 +77,7 @@ button:disabled {
 .prose-product-editor p {
   margin: 0;
   padding: 0;
-}
-
-.prose-product-editor p:empty,
-.prose-product-editor p:has(> br:only-child) {
-  display: none;
+  min-height: 1.45em;
 }
 
 .prose-product-editor p + p {

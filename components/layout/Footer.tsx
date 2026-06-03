@@ -11,6 +11,7 @@ const footerLinks = {
     { label: "Categories", href: ROUTES.categories },
     { label: "Gaming", href: ROUTES.gaming },
     { label: "Brands", href: ROUTES.brands },
+    { label: "Blog", href: ROUTES.blog },
   ],
   Account: [
     { label: "Log in", href: ROUTES.login },
@@ -29,8 +30,9 @@ export function Footer() {
           <div>
             <SiteLogo imageClassName="h-10 w-auto max-w-[180px] object-contain" />
             <p className="mt-4 text-sm text-gray-600">
-              Your trusted store for gaming, software, gift cards, and digital
-              products at {SITE_DOMAIN}.
+              Buy gift cards, gaming credits, and digital products in Nepal —
+              PUBG UC, Roblox, Steam, PlayStation, Xbox, Apple &amp; more at{" "}
+              {SITE_DOMAIN}. Pay with Fonepay or Khalti.
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-gray-600">
               <li className="flex items-start gap-2">

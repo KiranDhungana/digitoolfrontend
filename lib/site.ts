@@ -3,9 +3,9 @@ export const SITE_DOMAIN = "digitoolera.com";
 export const SITE_LOGO_PATH = "/images/logo.png";
 export const SITE_URL = `https://${SITE_DOMAIN}`;
 export const SITE_DESCRIPTION =
-  "Shop gaming, software, gift cards, and digital products at digitoolera.com.";
+  "Buy gift cards, gaming credits & digital products in Nepal — PUBG UC, Roblox, Steam, PlayStation, Xbox, Apple & Microsoft 365. Pay with Fonepay or Khalti at Digitoolera.";
 
-export const SITE_TITLE_DEFAULT = `${SITE_NAME} | Digital Products & Gift Cards`;
+export const SITE_TITLE_DEFAULT = `${SITE_NAME} | Gift Cards & Digital Products in Nepal`;
 export const SITE_TITLE_TEMPLATE = `%s | ${SITE_NAME}`;
 
 export const CONTACT_EMAIL = "digitoolera@gmail.com";

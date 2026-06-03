@@ -4,10 +4,9 @@ import { PageHeader } from "@/components/catalog/PageHeader";
 import { PageShell } from "@/components/layout/PageShell";
 import { ROUTES } from "@/lib/constants";
 import { getProducts } from "@/lib/data";
+import { PAGE_SEO } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "All Gift Cards",
-};
+export const metadata: Metadata = PAGE_SEO.giftCards;
 
 export default async function GiftCardsPage() {
   const products = await getProducts();
@@ -15,8 +14,8 @@ export default async function GiftCardsPage() {
   return (
     <PageShell>
       <PageHeader
-        title="All gift cards"
-        description="Browse our full catalogue of digital gift cards. Pay securely online."
+        title="Buy gift cards online in Nepal"
+        description="Browse digital gift cards for gaming, apps and software. Prices in NPR — pay with Fonepay or Khalti."
         breadcrumbs={[
           { label: "Home", href: ROUTES.home },
           { label: "All gift cards" },

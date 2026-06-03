@@ -13,11 +13,9 @@ import { PageShell } from "@/components/layout/PageShell";
 import { Button } from "@/components/ui/Button";
 import { ROUTES } from "@/lib/constants";
 import { SITE_NAME } from "@/lib/site";
+import { PAGE_SEO } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "How It Works",
-  description: `Learn how to shop gaming, software, and digital products on ${SITE_NAME}.`,
-};
+export const metadata: Metadata = PAGE_SEO.howItWorks;
 
 const steps = [
   {

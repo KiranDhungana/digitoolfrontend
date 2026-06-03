@@ -7,6 +7,7 @@ import { CategoryIcon } from "@/components/home/CategoryIcon";
 import { PageShell } from "@/components/layout/PageShell";
 import { ROUTES } from "@/lib/constants";
 import { getCategory } from "@/lib/data";
+import { buildCategoryMetadata } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -15,7 +16,12 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = await getCategory(slug);
-  return { title: data?.category.name ?? "Category" };
+  if (!data) return { title: "Category" };
+  return buildCategoryMetadata(
+    data.category.name,
+    slug,
+    data.category.productCount
+  );
 }
 
 export default async function CategoryPage({ params }: PageProps) {
@@ -40,7 +46,7 @@ export default async function CategoryPage({ params }: PageProps) {
         gradient={data.category.gradient}
         imageUrl={data.category.imageUrl}
         fallback={<CategoryIcon name={data.category.icon} className="h-16 w-16 text-white/80" />}
-        subtitle={`Browse ${data.category.productCount}+ items in ${data.category.name.toLowerCase()}.`}
+        subtitle={`Buy ${data.category.name.toLowerCase()} gift cards in Nepal — ${data.category.productCount}+ products. Pay with Fonepay or Khalti.`}
       />
       <CatalogView
         products={data.products}

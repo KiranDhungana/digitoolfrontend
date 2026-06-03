@@ -7,10 +7,9 @@ import { PageHeader } from "@/components/catalog/PageHeader";
 import { PageShell } from "@/components/layout/PageShell";
 import { ROUTES } from "@/lib/constants";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/site";
+import { PAGE_SEO } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-};
+export const metadata: Metadata = PAGE_SEO.contact;
 
 export default function ContactPage() {
   return (

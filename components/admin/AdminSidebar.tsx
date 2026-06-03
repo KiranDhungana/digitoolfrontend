@@ -12,6 +12,7 @@ import {
   Store,
   ExternalLink,
   Wallet,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,6 +26,8 @@ import { SITE_DOMAIN } from "@/lib/site";
 const links = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/products", label: "Products", icon: Package },
+  { href: "/admin/blogs", label: "Blog", icon: FileText },
+  { href: "/admin/blog-categories", label: "Blog categories", icon: FolderTree },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList },
   { href: "/admin/referrals", label: "Referrals", icon: Wallet },
   { href: "/admin/contact", label: "Contact", icon: Inbox },

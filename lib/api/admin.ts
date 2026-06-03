@@ -93,6 +93,9 @@ export interface DashboardStats {
   pendingOrders: number;
   unreadChats: number;
   newContactMessages: number;
+  blogDrafts?: number;
+  blogPublished?: number;
+  blogScheduled?: number;
 }
 
 export type ContactMessageStatus = "new" | "read" | "archived";

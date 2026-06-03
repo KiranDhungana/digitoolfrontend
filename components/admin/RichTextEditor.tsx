@@ -23,8 +23,8 @@ import {
   Strikethrough,
   Underline as UnderlineIcon,
 } from "lucide-react";
-import { useEffect, useRef, type ReactNode } from "react";
-import { compactDescriptionHtml, plainTextToEditorHtml } from "@/lib/sanitizeHtml";
+import { useEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
+import { plainTextToEditorHtml } from "@/lib/sanitizeHtml";
 
 const FONT_FAMILIES = [
   { label: "Default", value: "" },
@@ -82,6 +82,25 @@ interface RichTextEditorProps {
   onChange: (html: string) => void;
   required?: boolean;
   minHeight?: string;
+}
+
+/** Call on parent `<form>` so Enter in the editor does not submit the form. */
+export function handleRichTextEditorFormKeyDown(
+  event: KeyboardEvent<HTMLFormElement>
+) {
+  if (event.key !== "Enter") return;
+  const target = event.target as HTMLElement;
+  if (
+    target.closest("[data-rich-text-editor]") ||
+    target.closest('[contenteditable="true"]')
+  ) {
+    // Block implicit form submit; TipTap already handled the key in the editor.
+    event.preventDefault();
+  }
+}
+
+export function richTextHasContent(html: string): boolean {
+  return html.replace(/<[^>]+>/g, "").trim().length > 0;
 }
 
 function LineHeightSelect({ editor }: { editor: Editor }) {
@@ -332,16 +351,20 @@ function EditorToolbar({ editor }: { editor: Editor }) {
 export function RichTextEditor({
   value,
   onChange,
-  required,
+  required: _required,
   minHeight = "220px",
 }: RichTextEditorProps) {
   const lastEmittedRef = useRef(value);
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
 
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         heading: { levels: [2, 3] },
+        link: false,
+        underline: false,
       }),
       Underline,
       TextStyle,
@@ -364,16 +387,18 @@ export function RichTextEditor({
       },
     },
     onUpdate: ({ editor: ed }) => {
-      const html = compactDescriptionHtml(ed.getHTML());
+      const html = ed.getHTML();
       const next = html === "<p></p>" || !html.trim() ? "" : html;
       lastEmittedRef.current = next;
-      onChange(next);
+      onChangeRef.current(next);
     },
   });
 
   // Only reset editor when value changes from outside (e.g. loading another product)
   useEffect(() => {
     if (!editor) return;
+    // Never overwrite the document while the user is typing — avoids undoing Enter/newlines.
+    if (editor.isFocused) return;
     if (lastEmittedRef.current === value) return;
 
     lastEmittedRef.current = value;
@@ -390,24 +415,15 @@ export function RichTextEditor({
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white focus-within:border-orange-300 focus-within:ring-2 focus-within:ring-orange-100">
+    <div
+      className="overflow-hidden rounded-xl border border-gray-200 bg-white focus-within:border-orange-300 focus-within:ring-2 focus-within:ring-orange-100"
+      data-rich-text-editor
+    >
       <EditorToolbar editor={editor} />
 
       <div style={{ minHeight }} className="bg-gray-50/30 product-description-editor">
         <EditorContent editor={editor} />
       </div>
-
-      {required && (
-        <input
-          type="text"
-          tabIndex={-1}
-          aria-hidden
-          className="sr-only"
-          value={value.replace(/<[^>]+>/g, "").trim()}
-          required
-          onChange={() => {}}
-        />
-      )}
     </div>
   );
 }

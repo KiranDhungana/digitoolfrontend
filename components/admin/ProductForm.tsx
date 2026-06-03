@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { ProductImagePicker } from "@/components/admin/ProductImagePicker";
-import { RichTextEditor } from "@/components/admin/RichTextEditor";
+import { RichTextEditor, handleRichTextEditorFormKeyDown, richTextHasContent } from "@/components/admin/RichTextEditor";
 import {
   adminCreateProduct,
   adminUpdateProduct,
@@ -44,6 +44,10 @@ export function ProductForm({ brands, categories, initial }: ProductFormProps) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
+    if (!richTextHasContent(form.description)) {
+      setError("Description is required");
+      return;
+    }
     setLoading(true);
 
     const denominations = form.denominations
@@ -83,7 +87,11 @@ export function ProductForm({ brands, categories, initial }: ProductFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl space-y-4 rounded-2xl border border-gray-200 bg-white p-6">
+    <form
+      onSubmit={handleSubmit}
+      onKeyDown={handleRichTextEditorFormKeyDown}
+      className="max-w-3xl space-y-4 rounded-2xl border border-gray-200 bg-white p-6"
+    >
       <Input label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
       <Input label="Slug (URL id)" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} placeholder="e.g. roblox-25" />
       <div>
@@ -96,7 +104,7 @@ export function ProductForm({ brands, categories, initial }: ProductFormProps) {
         <RichTextEditor
           key={initial?.dbId ?? "new"}
           value={form.description}
-          onChange={(description) => setForm({ ...form, description })}
+          onChange={(description) => setForm((prev) => ({ ...prev, description }))}
           required
           minHeight="260px"
         />

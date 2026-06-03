@@ -1,6 +1,6 @@
 "use client";
 
-import { Package, FolderTree, Store, Users, ImageIcon, ClipboardList, Inbox, MessageCircle } from "lucide-react";
+import { Package, FolderTree, Store, Users, ImageIcon, ClipboardList, Inbox, MessageCircle, FileText } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { adminStats, type DashboardStats } from "@/lib/api/admin";
@@ -100,6 +100,24 @@ export default function AdminDashboardPage() {
             value={stats.unreadChats ?? 0}
             icon={MessageCircle}
             href="/admin/chat"
+          />
+          <StatCard
+            label="Blog drafts"
+            value={stats.blogDrafts ?? 0}
+            icon={FileText}
+            href="/admin/blogs"
+          />
+          <StatCard
+            label="Published blogs"
+            value={stats.blogPublished ?? 0}
+            icon={FileText}
+            href="/admin/blogs"
+          />
+          <StatCard
+            label="Scheduled blogs"
+            value={stats.blogScheduled ?? 0}
+            icon={FileText}
+            href="/admin/blogs"
           />
         </div>
       )}

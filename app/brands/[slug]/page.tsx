@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/catalog/Breadcrumbs";
 import { PageShell } from "@/components/layout/PageShell";
 import { ROUTES } from "@/lib/constants";
 import { getBrand } from "@/lib/data";
+import { buildBrandMetadata } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -14,7 +15,8 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = await getBrand(slug);
-  return { title: data?.brand.name ?? "Brand" };
+  if (!data) return { title: "Brand" };
+  return buildBrandMetadata(data.brand.name, slug, data.brand.productCount);
 }
 
 export default async function BrandPage({ params }: PageProps) {
@@ -38,7 +40,7 @@ export default async function BrandPage({ params }: PageProps) {
         name={`${data.brand.name} gift cards`}
         gradient={data.brand.gradient}
         imageUrl={data.brand.imageUrl}
-        subtitle={`${data.brand.productCount}+ items from ${data.brand.name}.`}
+        subtitle={`Buy ${data.brand.name} gift cards in Nepal — ${data.brand.productCount}+ products. Fonepay & Khalti accepted.`}
       />
       <CatalogView
         products={data.products}
