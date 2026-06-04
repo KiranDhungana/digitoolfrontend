@@ -1,5 +1,6 @@
 import { ROUTES } from "@/lib/constants";
 import { SITE_URL } from "@/lib/site";
+import { buildWhatsAppUrl, getConfiguredWhatsAppDigits } from "@/lib/whatsapp";
 
 export const PENDING_PRODUCT_INQUIRY_KEY = "digitoolera_pending_product_inquiry";
 
@@ -16,6 +17,20 @@ export function buildProductInquiryMessage(product: PendingProductInquiry): stri
       : `${SITE_URL}${path}`;
 
   return `Hi, I have a question about this product:\n\n${product.name}\n${url}\n\n`;
+}
+
+function whatsappDigits(phone: string): string {
+  return phone.replace(/\D/g, "");
+}
+
+export function buildProductWhatsAppUrl(
+  product: PendingProductInquiry,
+  phoneNumber?: string
+): string {
+  const digits = phoneNumber
+    ? whatsappDigits(phoneNumber)
+    : getConfiguredWhatsAppDigits();
+  return buildWhatsAppUrl(buildProductInquiryMessage(product), digits);
 }
 
 export function savePendingProductInquiry(product: PendingProductInquiry) {

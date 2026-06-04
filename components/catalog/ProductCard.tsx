@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProductImage } from "@/components/catalog/ProductImage";
 import { ProductInquiryButton } from "@/components/product/ProductInquiryButton";
+import { ProductWhatsAppInquiryButton } from "@/components/product/ProductWhatsAppInquiryButton";
 import type { Product } from "@/lib/types";
 import { ROUTES } from "@/lib/constants";
 import { formatPrice } from "@/lib/currency";
@@ -30,7 +31,8 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <article className="group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:border-orange-200 hover:shadow-md">
       <Link href={ROUTES.product(product.id)} className="relative block w-full shrink-0">
-        <div className="absolute right-2 top-2 z-10">
+        <div className="absolute right-2 top-2 z-10 flex gap-1.5">
+          <ProductWhatsAppInquiryButton product={product} />
           <ProductInquiryButton product={product} />
         </div>
         <ProductImage

@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { ChatSocketProvider } from "@/components/chat/ChatSocketProvider";
 import { UserAuthProvider } from "@/components/auth/UserAuthProvider";
 import { StoreChrome } from "@/components/layout/StoreChrome";
+import { GoogleAds } from "@/components/seo/GoogleAds";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   organizationJsonLd,
@@ -54,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white font-sans text-gray-900">
+        <GoogleAds />
         <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
         <UserAuthProvider>
           <ChatSocketProvider>

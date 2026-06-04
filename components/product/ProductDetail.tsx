@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ProductImage } from "@/components/catalog/ProductImage";
 import { ProductInquiryButton } from "@/components/product/ProductInquiryButton";
+import { ProductWhatsAppInquiryButton } from "@/components/product/ProductWhatsAppInquiryButton";
 import { ProductDescription } from "@/components/product/ProductDescription";
 import type { Product } from "@/lib/types";
 import { ROUTES } from "@/lib/constants";
@@ -119,6 +120,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
             variant="primary"
             className="w-full flex-1 py-3 sm:min-w-[140px]"
             showIcon={false}
+          />
+          <ProductWhatsAppInquiryButton
+            product={product}
+            variant="button"
+            className="w-full sm:w-auto sm:flex-1"
           />
           <ProductInquiryButton
             product={product}

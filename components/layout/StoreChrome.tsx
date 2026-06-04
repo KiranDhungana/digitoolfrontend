@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { WhatsAppFloatingButton } from "@/components/layout/WhatsAppFloatingButton";
 
 export function StoreChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -19,6 +20,7 @@ export function StoreChrome({ children }: { children: ReactNode }) {
       <Header />
       {children}
       <Footer />
+      <WhatsAppFloatingButton />
       <ChatWidget />
     </>
   );

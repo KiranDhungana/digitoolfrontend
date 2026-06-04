@@ -1,8 +1,10 @@
 import { Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { FooterSupportLinks } from "@/components/layout/FooterSupportLinks";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { ROUTES } from "@/lib/constants";
 import { CONTACT_EMAIL, SITE_ADDRESS, SITE_DOMAIN, SITE_NAME } from "@/lib/site";
+import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
 import { SiteLogo } from "@/components/layout/SiteLogo";
 
 const footerLinks = {
@@ -23,6 +25,8 @@ const footerLinks = {
 };
 
 export function Footer() {
+  const whatsappUrl = buildGeneralWhatsAppUrl();
+
   return (
     <footer className="mt-auto border-t border-gray-100 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -46,6 +50,19 @@ export function Footer() {
                   className="transition hover:text-orange-600 hover:underline"
                 >
                   {CONTACT_EMAIL}
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 shrink-0 text-orange-500" aria-hidden>
+                  <WhatsAppIcon className="h-4 w-4" />
+                </span>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-orange-600 hover:underline"
+                >
+                  WhatsApp us
                 </a>
               </li>
             </ul>
